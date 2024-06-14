@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Ticket from 'App/Models/Ticket'
 import HubspotService from 'App/Services/HubspotService'
-import TicketValidator from 'App/Validators/TicketValidator'
+//import TicketValidator from 'App/Validators/TicketValidator'
 
 
 export default class MainsController {
@@ -12,7 +12,7 @@ export default class MainsController {
 
   public async create_report({ request, view }: HttpContextContract) {
 
-    await request.validate(TicketValidator)
+    //await request.validate(TicketValidator)
         
     const {
       email,
