@@ -1,0 +1,41 @@
+@layout('master')
+
+@section('comment_csat')
+
+<style>
+    .move-up {
+      transform: translateY(-50px); /* Ajusta el valor según sea necesario */
+    }
+</style>
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="container col-6 p-2 move-up">
+      <div class="card">
+        <div class="card-body">
+          <div class="col col-12 align-items-center">
+            <div class="d-grid gap-2 mx-auto text-center">
+              <h2 class="card-title">Deja tu comentario </h2>
+            </div>
+            <div class="d-grid gap-2 mx-auto">
+                <form action="{{route('comment_csat')}}"  method="post" >
+                    {{csrfField()}}
+                    <div class="mb-3 d-none">
+                      <input class="form-control" name="id_ticket" id="id_ticket"  type="text" value="{{id_ticket}}">
+                    </div>
+
+                    <div class="mb-3" id="divDescription">
+                        <textarea class="form-control" name="comments" id="comments"></textarea>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary "> Enviar</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+</div>
+@end

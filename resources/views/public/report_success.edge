@@ -1,0 +1,30 @@
+@layout('master')
+
+@section('report_succes')
+
+<style>
+    .move-up {
+      transform: translateY(-50px); /* Ajusta el valor según sea necesario */
+    }
+</style>
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="container col-auto p-1 move-up">
+      <div class="card">
+        <div class="card-body">
+          <div class="col col-12 align-items-center">
+            <div class="d-grid gap-2 mx-auto text-center">
+              <h2 class="card-title">Reporte exitoso</h2>
+            </div>
+            <div class="d-grid gap-2 mx-auto">
+              <p class="card-text">Muy pronto se estarán comunicando nuestros agentes con usted.</p>
+              <a href="https://app.skydropx.com/dashboard" class="btn btn-primary">Volver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+</div>
+@end

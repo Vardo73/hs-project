@@ -1,0 +1,318 @@
+@layout('master')
+
+@section('form_report')
+
+<div class="m-0  row justify-content-center align-items-center" >
+  <div class="container col-auto  p-1 ">
+    <div class="card " >
+      <div class="card-body">
+        <div class="col col-12 align-self-end">
+          <div class="d-grid gap-2 mx-auto ">
+            <h2 class="card-title"> Reporte de Envío </h2>
+            <h5><strong>¡Hey! Recuerda elegir el tipo de incidencia adecuado, de lo contrario, tu reporte podría cerrarse automáticamente. </strong></h5>
+            <form action="{{route('create_report')}}" method="post">
+              {{csrfField()}}
+              <div>
+                <div id="divGeneral">
+                  <div class="mb-3">
+                    @if(flashMessages.has('errors.email'))
+                        <div class="alert alert-danger" role="alert">
+                            {{flashMessages.get('errors.email')}}
+                        </div>
+                    @endif
+                    <label for="email" class="required form-label">Email de cuenta:</label>
+                    <input class="form-control" name="email" id="email"  type="email" placeholder="name@example.com" required>
+                  </div>
+                  <div class="mb-3">
+                    @if(flashMessages.has('errors.country'))
+                        <div class="alert alert-danger" role="alert">
+                            {{flashMessages.get('errors.country')}}
+                        </div>
+                    @endif
+                    <label for="country" class="required form-label">País:</label>
+                    <select class="form-select" name="country" id="country" required>
+                      <option selected disabled ="" >Seleccione una opción</option>
+                      <option value="México">México</option>
+                      <option value="Colombia">Colombia</option>
+                      <option value="Chile">Chile</option>
+                      <option value="Argentina">Argentina</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    @if(flashMessages.has('errors.trackinNumber'))
+                        <div class="alert alert-danger" role="alert">
+                            {{flashMessages.get('errors.trackinNumber')}}
+                        </div>
+                    @endif
+                    <label for="trackinNumber" class="required form-label">Número de guía:</label>
+                    <input class="form-control" name="trackinNumber" id="trackinNumber"  type="text" placeholder="XXXXXXXXXX" required>
+                  </div>
+                  <div class="mb-3">
+                    @if(flashMessages.has('errors.carrier'))
+                        <div class="alert alert-danger" role="alert">
+                            {{flashMessages.get('errors.carrier')}}
+                        </div>
+                    @endif
+                    <label for="carrier" class="required form-label">Paquetera:</label>
+                    <select class="form-select" name="carrier" id="carrier" required>
+                      <option selected disabled ="" >Seleccione una opción</option>
+                      <option value="99 minutos">99 minutos</option>
+                      <option value="Almex">Almex</option>
+                      <option value="AMPM">AMPM</option>
+                      <option value="Borzo">Borzo</option>
+                      <option value="Carssa">Carssa</option>
+                      <option value="Chazki">Chazki</option>
+                      <option value="DHL">DHL</option>
+                      <option value="Dliver">Dliver</option>
+                      <option value="Dostavista">Dostavista</option>
+                      <option value="Estafeta">Estafeta</option>
+                      <option value="Estrella Roja">Estrella Roja</option>
+                      <option value="Fedex">Fedex</option>
+                      <option value="iEnvios">iEnvios</option>
+                      <option value="iMile">iMile</option>
+                      <option value="iVoy">iVoy</option>
+                      <option value="JTEXPRESS">JTEXPRESS</option>
+                      <option value="Mensajeros Urbanos">Mensajeros Urbanos</option>
+                      <option value="Moova">Moova</option>
+                      <option value="Paquetexpress">Paquetexpress</option>
+                      <option value="Quiken">Quiken</option>
+                      <option value="Redpack">Redpack</option>
+                      <option value="Sendex">Sendex</option>
+                      <option value="Tracusa">Tracusa</option>
+                      <option value="Tres Guerras">Tres Guerras</option>
+                      <option value="UPS">UPS</option>
+                      <option value="Indemnización">Reclamo</option>
+                      <option value="Indemnización">Reclamo</option>
+                      <option value="Indemnización">Reclamo</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mb-3" id="divSlcIncident">
+                  @if(flashMessages.has('errors.incident'))
+                      <div class="alert alert-danger" role="alert">
+                          {{flashMessages.get('errors.incident')}}
+                      </div>
+                  @endif
+                  <label for="incident" class="required form-label">Tipo de incidencia:</label>
+                  <select class="form-select" name="incident" id="incident" required>
+                    <option selected disabled ="" >Seleccione una opción</option>
+                      <option value="Aclaración de sobrepeso">Aclaración de sobrepeso</option>
+                      <option value="Agilización de entrega">Paquete demorado</option>
+                      <option value="Cambio de dirección / Dirección Incorrecta">Cambio de dirección o dirección incorrecta</option>
+                      <option value="Confirmación de entrega">Entrega desconocida / Confirmación de entrega</option>
+                      <option value="Devolución a origen">Devolución a origen</option>
+                      <option value="Indemnización">Reclamo siniestro</option>
+                      <option value="Recolección Incumplida">Recolección incumplida</option>
+                      <option value="Sin escaneos">Paquete sin movimientos</option>
+                  </select>
+                </div>
+
+                <!--EntregaDesconocida --->
+                <div class="mb-3 d-none" id="divEntregaDesconocida">
+                  <div class="mb-3">
+                    <label for="street" class="required form-label">Calle:</label>
+                    <input class="form-control" name="street" id="street"  type="text">
+                  </div>
+                  <div class="mb-3">
+                    <label for="zipcode" class="required form-label">Código Postal:</label>
+                    <input class="form-control" name="zipcode" id="zipcode"  type="number">
+                  </div>
+                  <div class="mb-3">
+                    <label for="city" class="required form-label">Ciudad:</label>
+                    <input class="form-control" name="city" id="city"  type="text">
+                  </div>
+                  <div class="mb-3">
+                    <label for="neighbourhood" class="required form-label">Colonia:</label>
+                    <input class="form-control" name="neighbourhood" id="neighbourhood"  type="text">
+                  </div>
+                  <div class="mb-3">
+                    <label for="state" class="required form-label">Estado:</label>
+                    <input class="form-control" name="state" id="state"  type="text">
+                  </div>
+                </div>
+
+                <!--ReclamoSiniestro --->
+                <div class="mb-3 d-none" id="divReclamoSiniestro">
+                  <div class="mb-3">
+                    <label for="reclamo" class="required form-label">Reclamación:</label>
+                    <select class="form-select" name="reclamo" id="reclamo" >
+                      <option selected disabled value="" >Seleccione una opción</option>
+                      <option value="Daño">Daño</option>
+                      <option value="Faltante">Faltante</option>
+                      <option value="Perdida/Faltante_Operaciones">Perdida</option>
+                      <option value="Daño_Operaciones">Robo externo</option>
+                      <option value="Fortuito">Fortuito</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="txtAddressDestination" class="required form-label">¿Su envío contaba con cobertura adicional?:</label>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="cobertura" id="rbCoberturaSi" value="Sí_cobertura">
+                      <label class="form-check-label" for="rbCoberturaSi">
+                        Si
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="cobertura" id="rbCoberturaNo" value="No_cobertura" checked>
+                      <label class="form-check-label" for="rbCoberturaNo">
+                        No
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="txtAddressDestination" class="required form-label">¿El embalaje exterior presenta alteraciones o daños?:</label>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="embalaje" id="rbEmbalajeSi" value="Si">
+                      <label class="form-check-label" for="rbEmbalajeSi">
+                        Si
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="embalaje" id="rbEmbalajeNo" value="No" checked>
+                      <label class="form-check-label" for="rbEmbalajeNo">
+                        No
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="txtDescripcionAlteraciones" class="required form-label">Describe detalladamente las alteraciones o daños que presenta el embalaje exterior:</label>
+                    <span class="small-text">Indique si tenía o no etiquetas, ej: frágil, manéjese con cuidado, este lado hacia arriba, no voltear, etc.</span>
+                    <input class="form-control" name="txtDescripcionAlteraciones" id="txtDescripcionAlteraciones"  type="text">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="descriptionContent" class="required form-label">¿Cuál era el contenido del paquete? ¿Cuántas piezas/ productos dañados o faltantes?</label>
+                    <textarea class="form-control" name="descriptionContent" id="descriptionContent" ></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="costoReposicion" class="required form-label">¿Cuál es el costo de reposición total de la pieza o producto?:</label>
+                    <input class="form-control" name="costoReposicion" id="costoReposicion"  type="text">
+                  </div>
+                  <!--
+                  <div class="mb-3">
+                    <label for="fileINE" class="required form-label">Identificación oficial (INE):</label>
+                    <input class="form-control" name="fileINE" id="fileINE" type="file">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="filePhotosBox" class="required form-label">Fotografías de los 6 lados de la caja:</label>
+                    <input class="form-control" name="filePhotosBox" id="filePhotosBox" type="file">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="fileFotoGuiaDañada" class="required form-label">Fotografías de la guía pegada al paquete dañado:</label>
+                    <input class="form-control" name="fileFotoGuiaDañada" id="fileFotoGuiaDañada" type="file">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="fileFotoAntesEnvio" class="required form-label">Fotografía del paquete antes de ser recolectado:</label>
+                    <input class="form-control" name="fileFotoAntesEnvio" id="fileFotoAntesEnvio" type="file">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="fileArticulo" class="required form-label">Fotografías artículo o producto afectado:</label>
+                    <input class="form-control" name="fileArticulo" id="fileArticulo" type="file">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="fileFotoEmbalaje" class="required form-label">Fotografía del embalaje interno:</label>
+                    <input class="form-control" name="fileFotoEmbalaje" id="fileFotoEmbalaje" type="file">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="fileFotoEvidencia" class="required form-label">Fotografías de evidencia:</label>
+                    <input class="form-control" name="fileFotoEvidencia" id="fileFotoEvidencia" type="file">
+                  </div>
+                  -->
+                </div>
+
+                <!--RecoleccionIncumplida --->
+                <div class="mb-3 d-none" id="divRecoleccionIncumplida">
+                  <div class="mb-3">
+                    <label for="addressDestination" class="required form-label">Dirección del remitente:</label>
+                    <span class="small-text">El formato debe ser calle, número, colonia y municipio.</span>
+                    <input class="form-control" name="addressDestination" id="addressDestination"  type="text">
+                  </div>
+                  <div class="mb-3">
+                    <label for="referens" class="required form-label">Referencias del lugar:</label>
+                    <span class="small-text">Ej: Puerta negra, dos pisos, rejas blancas.</span>
+                    <input class="form-control" name="referens" id="referens" type="text">
+                  </div>
+                </div>
+
+                <!--PaqueteSinMovimiento 
+                <div class="mb-3 d-none" id="divPaqueteSinMovimiento">
+                  <div class="mb-3">
+                    <label for="fileEvidenciaRecoleccion" class="required form-label">Evidencia de que el envió fue recolectado:</label>
+                    <span class="small-text">Elige un archivo JPG o PDF de tu dispositivo.</span>
+                    <input class="form-control" name="fileEvidenciaRecoleccion" id="fileEvidenciaRecoleccion" type="file">
+                  </div>
+                </div>
+                --->
+
+                <div class="mb-3" id="divDescription">
+                  @if(flashMessages.has('errors.description'))
+                      <div class="alert alert-danger" role="alert">
+                          {{flashMessages.get('errors.description')}}
+                      </div>
+                  @endif
+                  <label for="description" class="required form-label">Describe lo sucedido:</label>
+                  <textarea class="form-control" name="description" id="description" required ></textarea>
+                </div>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary"> Enviar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+
+  window.onload= document.addEventListener('DOMContentLoaded', function () {
+
+    const slcIncident = document.getElementById('incident');
+    const entregaDesconocida = document.getElementById('divEntregaDesconocida');
+    const reclamoSiniestro = document.getElementById('divReclamoSiniestro');
+    const recoleccionIncumplida = document.getElementById('divRecoleccionIncumplida');
+    //const paqueteSinMovimiento = document.getElementById('divPaqueteSinMovimiento');
+
+    slcIncident.addEventListener('change', function () {
+      // Ocultar todos los elementos extra
+      entregaDesconocida.classList.add('d-none');
+      reclamoSiniestro.classList.add('d-none');
+      recoleccionIncumplida.classList.add('d-none');
+      //paqueteSinMovimiento.classList.add('d-none');
+
+      // Mostrar el elemento correspondiente basado en la selección
+      switch (slcIncident.value) {
+        case 'Confirmación de entrega':
+          entregaDesconocida.classList.remove('d-none');
+          break;
+        case 'Indemnización':
+          reclamoSiniestro.classList.remove('d-none');
+          break;
+        case 'Recolección Incumplida':
+          recoleccionIncumplida.classList.remove('d-none');
+          break;
+        /*case 'Sin escaneos':
+          paqueteSinMovimiento.classList.remove('d-none');
+          break;
+        */
+      }
+    });
+  });
+
+</script>
+@end
