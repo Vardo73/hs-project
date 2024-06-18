@@ -99,7 +99,7 @@ export default class MainsController {
 
     try {
       await hubspotService.comment_csat(id_ticket, comment);
-     } catch (error) {
+    } catch (error) {
       console.error(`Error adding comment to ticket ${id_ticket}:`, error);
     }
 
@@ -117,7 +117,7 @@ export default class MainsController {
     
     try {
       await hubspotService.csat_sentiment(id_ticket, sentiment);
-      return view.render('public/comment_csat');
+      return view.render('public/comment_csat',{id_ticket});
     } catch (error) {
       console.error(`Error adding sentiment to ticket ${id_ticket}:`, error);
       return  { message: 'Failed to update sentiment' };

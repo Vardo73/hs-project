@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('country',25).notNullable()
       table.string('tracking_number',30).notNullable()
       table.string('carrier',25).notNullable()
-      table.string('incident_type',25).notNullable()
+      table.string('incident_type',50).notNullable()
       table.string('description',128).notNullable()
       table.boolean('update_hs')
 
@@ -21,7 +21,7 @@ export default class extends BaseSchema {
       table.string('neighbourhood',128)
       table.string('state',128)
 
-      table.string('claim',25)
+      table.string('claim',50)
       table.string('coverage',25)
       table.string('packaging',25)
       table.string('description_alt',128)
