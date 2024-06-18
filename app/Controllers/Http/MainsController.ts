@@ -91,14 +91,16 @@ export default class MainsController {
 
   public async comment_csat({ request, view }: HttpContextContract) {
     const hubspotService = new HubspotService();
-    const { id_ticket, comment } = request.body();
+    const { id_ticket, comments } = request.body();
 
-    if (!comment || comment.trim() === '') {
+
+    if (!comments || comments.trim() === '') {
       return view.render('public/comment_success');
     }
 
     try {
-      await hubspotService.comment_csat(id_ticket, comment);
+      await hubspotService.comment_csat(id_ticket, comments);
+      
     } catch (error) {
       console.error(`Error adding comment to ticket ${id_ticket}:`, error);
     }
@@ -116,6 +118,7 @@ export default class MainsController {
     }
     
     try {
+
       await hubspotService.csat_sentiment(id_ticket, sentiment);
       return view.render('public/comment_csat',{id_ticket});
     } catch (error) {

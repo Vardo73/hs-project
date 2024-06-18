@@ -44,11 +44,6 @@ export default class HubspotService{
         }
     }
 
-    private getCurrentDateISO(): string {
-        const now = new Date();
-        return now.toISOString();
-    }
-
     private getCurrentDate(): string {
         const now = new Date();
         const year = now.getFullYear();

@@ -5,7 +5,6 @@ export default class Ticket extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-
   @column()
   public email:string
 
