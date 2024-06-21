@@ -2,40 +2,322 @@
 
 @section('comment_csat')
 
+<!--
 <style>
-    .move-up {
-      transform: translateY(-50px); /* Ajusta el valor según sea necesario */
-    }
+  .move-up {
+    transform: translateY(-50px); /* Ajusta el valor según sea necesario */
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 1280px;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+  }
+
+  .container .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .container .img {
+    position: relative;
+    width: 32px;
+    height: 32px;
+  }
+
+  .container .group {
+    position: relative;
+    width: 169.77px;
+    height: 43px;
+  }
+
+  .container .card {
+    display: flex;
+    flex-direction: column;
+    width: 512px;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    padding: 32px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .container .heading {
+    position: relative;
+    align-self: stretch;
+    margin-top: -1px;
+    font-family: var(--text-2xl-font-extrabold-font-family);
+    font-weight: var(--text-2xl-font-extrabold-font-weight);
+    color: #111928;
+    font-size: var(--text-2xl-font-extrabold-font-size);
+    text-align: center;
+    letter-spacing: var(--text-2xl-font-extrabold-letter-spacing);
+    line-height: var(--text-2xl-font-extrabold-line-height);
+    font-style: var(--text-2xl-font-extrabold-font-style);
+  }
+
+  .container .inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .container .textarea {
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .container .form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    margin-top: -1px;
+    margin-bottom: -1px;
+    margin-left: -1px;
+    margin-right: -1px;
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: #d1d5db;
+  }
+
+  .container .content-wrapper {
+    gap: 10px;
+    padding: 13px 20px;
+    border-radius: 0px 0px 8px 8px;
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .container .content {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    flex: 1;
+    align-self: stretch;
+    flex-grow: 1;
+  }
+
+  .container .placeholder {
+    position: relative;
+    flex: 1;
+    margin-top: -1px;
+    font-family: var(--text-sm-font-normal-font-family);
+    font-weight: var(--text-sm-font-normal-font-weight);
+    color: transparent;
+    font-size: var(--text-sm-font-normal-font-size);
+    letter-spacing: var(--text-sm-font-normal-letter-spacing);
+    line-height: var(--text-sm-font-normal-line-height);
+    font-style: var(--text-sm-font-normal-font-style);
+  }
+
+  .container .text-wrapper {
+    color: #6b7280;
+    font-family: var(--text-sm-font-normal-font-family);
+    font-style: var(--text-sm-font-normal-font-style);
+    font-weight: var(--text-sm-font-normal-font-weight);
+    letter-spacing: var(--text-sm-font-normal-letter-spacing);
+    line-height: var(--text-sm-font-normal-line-height);
+    font-size: var(--text-sm-font-normal-font-size);
+  }
+
+  .container .span {
+    color: #111928;
+    font-family: var(--text-sm-font-normal-font-family);
+    font-style: var(--text-sm-font-normal-font-style);
+    font-weight: var(--text-sm-font-normal-font-weight);
+    letter-spacing: var(--text-sm-font-normal-letter-spacing);
+    line-height: var(--text-sm-font-normal-line-height);
+    font-size: var(--text-sm-font-normal-font-size);
+  }
+
+  .container .button-helper-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .container .button {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    background-color: #5233ea;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .container .text {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: var(--text-sm-font-medium-font-family);
+    font-weight: var(--text-sm-font-medium-font-weight);
+    color: #ffffff;
+    font-size: var(--text-sm-font-medium-font-size);
+    letter-spacing: var(--text-sm-font-medium-letter-spacing);
+    line-height: var(--text-sm-font-medium-line-height);
+    white-space: nowrap;
+    font-style: var(--text-sm-font-medium-font-style);
+  }
+
 </style>
 
-<div class="d-flex justify-content-center align-items-center min-vh-100">
-    <div class="container col-6 p-2 move-up">
-      <div class="card">
-        <div class="card-body">
-          <div class="col col-12 align-items-center">
-            <div class="d-grid gap-2 mx-auto text-center">
-              <h2 class="card-title">Deja tu comentario </h2>
-            </div>
-            <div class="d-grid gap-2 mx-auto">
-                <form action="{{route('comment_csat')}}"  method="post" >
-                    {{csrfField()}}
-                    <div class="mb-3 d-none">
-                      <input class="form-control" name="id_ticket" id="id_ticket"  type="text" value="{{id_ticket}}">
-                    </div>
 
-                    <div class="mb-3" id="divDescription">
-                        <textarea class="form-control" name="comments" id="comments"></textarea>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary "> Enviar</button>
-                    </div>
-                </form>
+<div class="container">
+  <div class="logo"><img class="img" src="../../img/icono_sky.svg" /> <img class="group" src="../../img/logo_sky.svg" /></div>
+  <div class="card">
+    <div class="heading">¿En qué podemos mejorar?</div>
+    <div class="inputs">
+      <div class="textarea">
+        <div class="form">
+          <div class="content-wrapper">
+            <div class="content">
+              <p class="placeholder">
+                <span class="text-wrapper">Escribe aquí tus sugerencias o comentarios...<br /></span>
+                <span class="span"><br /><br /><br /><br /><br /><br /><br /></span>
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="button-helper-text">
+      <button class="button"><div class="text">Enviar</div></button>
+    </div>
+  </div>
+</div>
+-->
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 1280px;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 512px;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    padding: 32px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+  .heading {
+    position: relative;
+    align-self: stretch;
+    margin-top: -1px;
+    font-family: var(--text-2xl-font-extrabold-font-family);
+    font-weight: var(--text-2xl-font-extrabold-font-weight);
+    color: #111928;
+    font-size: var(--text-2xl-font-extrabold-font-size);
+    text-align: center;
+    letter-spacing: var(--text-2xl-font-extrabold-letter-spacing);
+    line-height: var(--text-2xl-font-extrabold-line-height);
+    font-style: var(--text-2xl-font-extrabold-font-style);
+  }
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+  .custom-btn {
+    background-color: #5233EA !important;
+    border-color: #5233EA !important;
+  }
+  .custom-btn:hover {
+    background-color: #412bb5 !important; /* Color más oscuro para el hover */
+    border-color: #412bb5 !important;
+  }
+  .custom-btn:focus, .custom-btn:active {
+    background-color: #301f8f !important; /* Color más oscuro para el active/focus */
+    border-color: #301f8f !important;
+    box-shadow: 0 0 0 0.2rem rgba(82, 51, 234, 0.5) !important; /* Sombra personalizada */    
+  }
+</style>
+<br>
+<div class="container col-12 p-2 ">
+  <div class="logo"><img class="img" src="../../img/icono_sky.svg" /> <img class="group" src="../../img/logo_sky.svg" /></div>
+    <div class="card">
+      <div class="heading"><h4>¿En qué podemos mejorar?</h4></div>
+      <div class="inputs d-grid">
+        <form action="{{route('comment_csat')}}"  method="post" >
+          {{csrfField()}}
+          <div class=" d-none">
+            <input class="form-control" name="id_ticket" id="id_ticket"  type="text" value="{{id_ticket}}">
+          </div>
+
+          <div class="mb-3" id="divDescription">
+            <textarea class="form-control" name="comments" id="comments" placeholder="Escribe aquí tus sugerencias o comentarios..." rows="5"></textarea>
+          </div>
+          <div class="d-grid ">
+            <button type="submit" class="btn btn-primary custom-btn"> Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
-</div>
 @end

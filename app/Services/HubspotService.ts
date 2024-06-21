@@ -174,7 +174,6 @@ export default class HubspotService{
         }
     }
 
-
     public async comment_csat(id_ticket:string,comment:string): Promise<boolean>{
 
       let url=`${URL_BASE}crm/v3/objects/tickets/${id_ticket}`

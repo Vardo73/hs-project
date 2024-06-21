@@ -3,23 +3,89 @@
 @section('comment_succes')
 
 <style>
-  .move-up {
-    transform: translateY(-50px); /* Ajusta el valor según sea necesario */
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 1280px;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 512px;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    padding: 32px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+  .heading {
+    font-family: var(--text-2xl-font-extrabold-font-family);
+    font-weight: var(--text-2xl-font-extrabold-font-weight);
+    font-size: var(--text-2xl-font-extrabold-font-size);
+    line-height: var(--text-2xl-font-extrabold-line-height);
+    position: relative;
+    align-self: stretch;
+    color: #111928;
+    text-align: center;
+    letter-spacing: var(--text-2xl-font-extrabold-letter-spacing);
+    font-style: var(--text-2xl-font-extrabold-font-style);
+  }
+  .text-wrapper {
+    font-family: var(--text-xl-font-normal-font-family);
+    font-weight: var(--text-xl-font-normal-font-weight);
+    font-size: var(--text-xl-font-normal-font-size);
+    line-height: var(--text-xl-font-normal-line-height);
+    position: relative;
+    align-self: stretch;
+    color: #111928;
+    text-align: center;
+    letter-spacing: var(--text-xl-font-normal-letter-spacing);
+    font-style: var(--text-xl-font-normal-font-style);
+  }
+  .paper-plane {
+    display: flex;
+    width: 96px;
+    height: 96px;
+    align-items: center;
+    justify-content: center;
+    gap: 4.8px;
+    padding: 4.8px;
+    position: relative;
+  }
+  .box{
+    width: 86px;
+    height: 72px;
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 </style>
 
-<div class="d-flex justify-content-center align-items-center min-vh-100">
-  <div class="container col-auto p-1 move-up">
+<br>
+<div class="container col-12 p-2 ">
+  <div class="logo"><img class="img" src="../../img/icono_sky.svg" /> <img class="group" src="../../img/logo_sky.svg" /></div>
     <div class="card">
-      <div class="card-body">
-        <div class="col col-12 align-items-center">
-          <div class="d-grid gap-2 mx-auto text-center">
-            <h2 class="card-title">Gracias por tu respuesta</h2>
-          </div>
-        </div>
+      <div class="heading">
+        <img class="img" src="../../img/icono_gracias.svg" /> 
       </div>
+      <div class="heading">¡Gracias por tus comentarios!</div>
+      <p class="text-wrapper">Tu opinión es muy valiosa para nosotros.</p>
     </div>
-  </div>
 </div>
 
 @end
