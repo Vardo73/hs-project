@@ -1,1 +1,45 @@
-version: 'version'
+version: '3.9'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hs-project
+    container_name: hs_project
+    environment:
+      NODE_ENV: production
+      PORT: 3333
+      HOST: 0.0.0.0
+      APP_KEY: [APP_KEY_ADONIS]
+      DRIVE_DISK: local
+      SESSION_DRIVER: cookie
+      CACHE_VIEWS: false
+      DB_CONNECTION: pg
+      PG_HOST: db
+      PG_PORT: 5432
+      PG_USER: [USER]
+      PG_PASSWORD: [PASSWORD]
+      PG_DB_NAME: [DB_NAME]
+      API_KEY_HUBSPOT: Bearer [TOKEN]
+    ports:
+      - "3333:3333"
+    depends_on:
+      - db
+    volumes:
+      - .:/home/node/app
+    command: [ "dumb-init", "node", "server.js" ]
+
+  db:
+    image: postgres:13
+    container_name: adonis_db
+    environment:
+      POSTGRES_USER: [USER]
+      POSTGRES_PASSWORD: [PASSWORD]
+      POSTGRES_DB: [DB_NAME]
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
