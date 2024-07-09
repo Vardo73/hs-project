@@ -6,11 +6,13 @@ import HubspotService from 'App/Services/HubspotService'
 
 export default class MainsController {
 
+  //Manda a formulario de creación de reporte
   public async show({view}:HttpContextContract){
-      return view.render('public/form_report')
+    return view.render('public/form_report')
   }
 
-  public async create_report({ request, view }: HttpContextContract) {
+  //Creación del reporte
+  public async create_report({ request, view } : HttpContextContract) {
 
     //await request.validate(TicketValidator)
         
@@ -88,8 +90,8 @@ export default class MainsController {
     return view.render('public/report_success')
   }
 
-
-  public async comment_csat({ request, view }: HttpContextContract) {
+  //Recibe el momentario del usuario 
+  public async comment_csat({ request, view } : HttpContextContract) {
     const hubspotService = new HubspotService();
     const { id_ticket, comments } = request.body();
 
@@ -108,8 +110,16 @@ export default class MainsController {
     return view.render('public/comment_success');
   }
 
-  public async csat_sentiment({ params, view}: HttpContextContract){
+  //Recibe calificación CSAT por Correo, regresa pagina de comentario
+  public async csat_sentiment({ params, view,request} : HttpContextContract){
     const hubspotService = new HubspotService();
+    const clientIp = request.ip()
+    const userAgent = request.header('User-Agent')
+    const referer = request.header('Referer')
+    const geoInfo = await hubspotService.getGeoInfo(clientIp)
+
+    const info_browser=`IP: ${clientIp}, User-Agent: ${userAgent}, Referer: ${referer}, GeoInfo: ${JSON.stringify(geoInfo)} `
+
     const { id_ticket, csat_sentiment: sentiment } = params;
     
     if (!id_ticket || !sentiment) {
@@ -119,11 +129,47 @@ export default class MainsController {
     
     try {
 
-      await hubspotService.csat_sentiment(id_ticket, sentiment);
+      await hubspotService.csat_sentiment(id_ticket, sentiment,info_browser);
       return view.render('public/comment_csat',{id_ticket});
     } catch (error) {
       console.error(`Error adding sentiment to ticket ${id_ticket}:`, error);
       return  { message: 'Failed to update sentiment' };
     }
+  }
+
+  //Muestra formualario completo de CSAT Propio
+  public async show_wsp_csat_sentiment({ params , view} : HttpContextContract ){
+
+    const { id_ticket} = params;
+
+    return view.render('public/form_csat',{id_ticket})
+  }
+
+  //Recibe info formulario CSAT propio 
+  public async wsp_csat({request,view}: HttpContextContract){
+
+    const hubspotService = new HubspotService();
+    const clientIp = request.ip()
+    const userAgent = request.header('User-Agent')
+    const referer = request.header('Referer')
+    const geoInfo = await hubspotService.getGeoInfo(clientIp)
+
+    const info_browser=`IP: ${clientIp}, User-Agent: ${userAgent}, Referer: ${referer}, GeoInfo: ${JSON.stringify(geoInfo)} `
+
+    const { id_ticket,csat_sentiment, comments } = request.body();
+
+    if (!id_ticket || !csat_sentiment) {
+      console.error('id_ticket or sentiment is missing');
+      return { message: 'Invalid parameters' };
+    }
+
+    try {
+      await hubspotService.csat_sentiment(id_ticket, csat_sentiment,info_browser,comments);
+      
+    } catch (error) {
+      console.error(`Error adding comment to ticket ${id_ticket}:`, error);
+    }
+
+    return view.render('public/comment_success');
   }
 }

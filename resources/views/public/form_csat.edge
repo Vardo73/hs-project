@@ -1,6 +1,6 @@
 @layout('master')
 
-@section('comment_csat')
+@section('csat_form')
 
 <style>
   .container {
@@ -68,29 +68,69 @@
     border-color: #301f8f !important;
     box-shadow: 0 0 0 0.2rem rgba(82, 51, 234, 0.5) !important; /* Sombra personalizada */    
   }
+  .emoji-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+  }
+  .emoji-container label {
+    cursor: pointer;
+  }
+  .emoji-container input[type="radio"] {
+    display: none;
+  }
+  .emoji-container img {
+    width: 64px;
+    height: 64px;
+    transition: transform 0.3s, border 0.3s;
+  }
+  .emoji-container input[type="radio"]:checked + img {
+    transform: scale(1.2);
+    border: 5px solid #5233EA;
+    border-radius: 50%;
+  }
 </style>
+
 <br>
-<div class="container col-12 p-2 ">
+
+<div class="container col-12 p-2">
   <div class="logo"><img class="img" src="../../img/icono_sky.svg" /> <img class="group" src="../../img/logo_sky.svg" /></div>
     <div class="card">
-      <div class="heading"><h4>¿En qué podemos mejorar?</h4></div>
+      <div class="heading"><h4 style="font-weight:bold;font-family:arial,sans-serif;margin:0;color:#373f46;">¿Cómo calificas la atención recibida?</h4></div>
       <div class="inputs d-grid">
-        <form action="{{route('comment_csat')}}"  method="post" >
-          {{csrfField()}}
-          <div class=" d-none">
-            <input class="form-control" name="id_ticket" id="id_ticket"  type="text" value="{{id_ticket}}">
-          </div>
+        <form action="{{route('wsp_csat_sentiment')}}"  method="post" id="feedbackForm">
 
-          <div class="mb-3" id="divDescription">
-            <textarea class="form-control" name="comments" id="comments" placeholder="Escribe aquí tus sugerencias o comentarios..." rows="5"></textarea>
-          </div>
-          <div class="d-grid ">
-            <button type="submit" class="btn btn-primary custom-btn"> Enviar</button>
+            {{csrfField()}}
+
+            <div class="emoji-container">
+                <label>
+                    <input type="radio" name="csat_sentiment" value="positive" >
+                    <img src="../../img/happy_face.svg" alt="Positivo">
+                </label>
+                <label>
+                    <input type="radio" name="csat_sentiment" value="negative" >
+                    <img src="../../img/sad_face.svg" alt="Negativo">
+                </label>
+            </div>
+            <br>
+
+            <div class="d-none">
+                <input class="form-control" name="id_ticket" id="id_ticket" type="text" value="{{id_ticket}}">
+            </div>
+
+            <div class="mb-3" id="divDescription">
+                <textarea class="form-control" name="comments" id="comments" placeholder="Escribe aquí tus sugerencias o comentarios..." rows="5"></textarea>
+            </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary custom-btn">Enviar</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+
 
 @end
